@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { provide, reactive } from "vue";
 import TheHeader from "@/components/TheHeader.vue";
 import EntryEditor from "./components/EntryEditor.vue";
 import EntryCard from "@/components/EntryCard.vue";
 import type User from "@/types/User";
 import type Entry from "@/types/Entry";
+import { userInjectionKey } from "@/injectionKeys";
 
 const entries: Entry[] = reactive([]);
 
@@ -13,7 +14,8 @@ const user: User = reactive({
   userName: "Ilyas",
   settings: [],
 });
-console.log(user.id);
+
+provide(userInjectionKey, user);
 
 const handleCreateEntry = (entry: Entry) => {
   entries.unshift(entry);
